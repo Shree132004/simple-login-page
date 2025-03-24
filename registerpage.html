@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - My Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e3f2fd;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        a {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirm-password").value;
+            let usernameMessage = document.getElementById("username-message");
+            let passwordMessage = document.getElementById("password-message");
+            let confirmMessage = document.getElementById("confirm-message");
+
+            let usernamePattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$])[A-Za-z\d@#$]{6,}$/;
+            let passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$]).{8,}$/;
+
+            let valid = true;
+
+            // Username validation
+            if (!usernamePattern.test(username)) {
+                usernameMessage.style.display = "block";
+                usernameMessage.innerText = "Username must contain at least one letter, one number, and one special character (@, #, or $), and be at least 6 characters long.";
+                valid = false;
+            } else {
+                usernameMessage.style.display = "none";
+            }
+
+            // Password validation
+            if (!passwordPattern.test(password)) {
+                passwordMessage.style.display = "block";
+                passwordMessage.innerText = "Password must be at least 8 characters long and include at least one letter, one number, and one special character.";
+                valid = false;
+            } else {
+                passwordMessage.style.display = "none";
+            }
+
+            // Confirm password validation
+            if (password !== confirmPassword) {
+                confirmMessage.style.display = "block";
+                confirmMessage.innerText = "Passwords do not match.";
+                valid = false;
+            } else {
+                confirmMessage.style.display = "none";
+            }
+
+            return valid;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Register</h2>
+        <form action="#" method="POST" onsubmit="return validateForm()">
+            <input type="text" id="username" placeholder="Username" required>
+            <p id="username-message" class="error-message"></p>
+
+            <input type="password" id="password" placeholder="Password" required>
+            <p id="password-message" class="error-message"></p>
+
+            <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+            <p id="confirm-message" class="error-message"></p>
+
+            <button type="submit">Register</button>
+        </form>
+        <a href="loginpage.html">Already have an account? Login here</a>
+    </div>
+</body>
+</html>
